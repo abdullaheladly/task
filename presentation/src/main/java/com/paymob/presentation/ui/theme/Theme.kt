@@ -1,4 +1,4 @@
-package com.paymob.currencytask.ui.theme
+package com.paymob.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build

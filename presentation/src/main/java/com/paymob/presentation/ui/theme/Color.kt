@@ -1,4 +1,4 @@
-package com.paymob.currencytask.ui.theme
+package com.paymob.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
