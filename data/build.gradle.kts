@@ -17,6 +17,9 @@ android {
     }
 
     buildTypes {
+        getByName("debug") {
+            buildConfigField("String", "SECRET_KEY", "\"0cc6951bc14154bbc4c9ae700bb18fe4\"")
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -53,4 +56,9 @@ dependencies {
     api(libs.retrofit)
     api(libs.converter.gson)
     api(libs.logging.interceptor)
+
+    testImplementation(libs.androidx.junit)
+    testImplementation("org.mockito:mockito-core:5.4.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
 }

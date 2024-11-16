@@ -23,6 +23,9 @@ android {
     }
 
     buildTypes {
+        getByName("debug") {
+            buildConfigField("String", "SECRET_KEY", "\"0cc6951bc14154bbc4c9ae700bb18fe4\"")
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
