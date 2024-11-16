@@ -1,4 +1,4 @@
-package com.paymob.domain.repo
+package com.paymob.domain.converter.repo
 
 interface ConverterRepo {
     suspend fun getALlSymbols():List<String>
