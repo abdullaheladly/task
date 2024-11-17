@@ -11,10 +11,10 @@ import javax.inject.Inject
 class ConverterRemoteDataSource @Inject constructor(private val converterApi: ConverterApi, private val networkRouter: NetworkRouter) :
     ConverterDataSource {
     override suspend fun getALlSymbols(): SymbolsResponse {
-        return networkRouter.invokeApi { converterApi.getSymbols(BuildConfig.SECRET_KEY) }
+        return networkRouter.invokeApi { converterApi.getSymbols() }
     }
 
     override suspend fun convertCurrency(): ChangeCurrencyResponse {
-        return networkRouter.invokeApi { converterApi.getCurrenciesData(BuildConfig.SECRET_KEY) }
+        return networkRouter.invokeApi { converterApi.getCurrenciesData() }
     }
 }
