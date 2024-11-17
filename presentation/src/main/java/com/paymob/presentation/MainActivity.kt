@@ -11,7 +11,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.paymob.presentation.converter.ConverterScreen
+import com.paymob.presentation.history.HistoryScreen
 import com.paymob.presentation.ui.theme.MyApplicationTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,7 +29,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             MyApplicationTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                   ConverterScreen()
+                    val navController = rememberNavController()
+
+                    MainNavHost(navController)
                 }
             }
         }
@@ -31,17 +39,17 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+fun MainNavHost(navController: NavHostController) {
+    NavHost(navController, startDestination = NavRoutes.Home.route) {
+        composable(route = NavRoutes.Home.route) {
+            ConverterScreen(modifier = Modifier, navController = navController)
+        }
+        composable(
+            route = NavRoutes.History.route,
+            arguments = NavRoutes.History.arguments
+        ) {
+            HistoryScreen(modifier = Modifier,NavRoutes.History.fromEntry(it))
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MyApplicationTheme {
-        Greeting("Android")
+        }
     }
 }

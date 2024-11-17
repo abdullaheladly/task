@@ -28,10 +28,13 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.paymob.presentation.HistoryInput
+import com.paymob.presentation.NavRoutes
 
 
 @Composable
-fun ConverterScreen(modifier: Modifier = Modifier) {
+fun ConverterScreen(modifier: Modifier = Modifier,navController: NavController) {
     val convertViewModel = hiltViewModel<ConverterViewModel>()
     val currenciesList = convertViewModel.currenciesDataStateFlow.collectAsState()
     val result = convertViewModel.resultStateFlow.collectAsState()
@@ -58,6 +61,8 @@ fun ConverterScreen(modifier: Modifier = Modifier) {
             },
             onConvert = {
                 convertViewModel.convert(amountState)
+            }, onHistoryClicked = {
+                navController.navigate(NavRoutes.History.routeForHistory(HistoryInput(convertViewModel.fromCurrencyStateFlow.value,convertViewModel.toCurrencyStateFlow.value)))
             })
     }
 
@@ -73,7 +78,8 @@ fun CurrencyConverterScreen(
     onToCurrencyChange: (String) -> Unit,
     onAmountChange: (String) -> Unit,
     onSwapCurrencies: () -> Unit,
-    onConvert: () -> Unit
+    onConvert: () -> Unit,
+    onHistoryClicked: () -> Unit,
 ) {
     var isFromDropdownOpen by remember { mutableStateOf(false) }
     var isToDropdownOpen by remember { mutableStateOf(false) }
@@ -183,25 +189,15 @@ fun CurrencyConverterScreen(
         ) {
             Text("Convert")
         }
+
+        Button(
+            onClick = onHistoryClicked,
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(top = 16.dp)
+        ) {
+            Text("History")
+        }
     }
 }
 
-
-@Preview
-@Composable
-private fun d() {
-    CurrencyConverterScreen(currencies = listOf(),
-        amount = "1",
-        convertedValue = "",
-        onFromCurrencyChange = {},
-        onToCurrencyChange = {},
-        onAmountChange = {
-
-        },
-        onSwapCurrencies = {
-
-        },
-        onConvert = {
-
-        })
-}

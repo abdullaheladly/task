@@ -7,7 +7,7 @@ import javax.inject.Singleton
 
 @Singleton
 class CurrenciesLocalDataSource  @Inject constructor() : CurrenciesDataSource {
-
+    // we should rely on Room here but just for time limitation i did this approach
     private  var currenciesDataModel: ChangeCurrencyResponse? = null
     override suspend fun saveCurrencies(value: ChangeCurrencyResponse) {
         currenciesDataModel=value
