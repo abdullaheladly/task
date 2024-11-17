@@ -3,6 +3,7 @@ package com.paymob.currencytask.di
 
 
 import com.paymob.data.converter.remote.ConverterApi
+import com.paymob.data.history.remote.HistoryRateApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,6 +20,14 @@ object RetrofitModule {
     fun provideApiService(retrofit: Retrofit): ConverterApi {
         return retrofit.create(
             ConverterApi::class.java
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideHistoryRateApiService(retrofit: Retrofit): HistoryRateApi {
+        return retrofit.create(
+            HistoryRateApi::class.java
         )
     }
 }

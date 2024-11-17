@@ -2,6 +2,7 @@ package com.paymob.currencytask.di
 
 
 import android.content.Context
+import com.paymob.currencytask.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,8 +21,9 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-//    private const val BASE_URL = "https://fish-app.fishapp.ae/api/"
- private const val BASE_URL = "http://data.fixer.io/api/"
+ private const val BASE_URL = "https://api.apilayer.com/"
+
+
     @Singleton
     @Provides
     fun provideInterceptor(): HttpLoggingInterceptor {
@@ -29,7 +31,6 @@ object AppModule {
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         return interceptor
     }
-
 
     @Singleton
     @Provides
@@ -39,6 +40,7 @@ object AppModule {
 
             request = request.newBuilder()
                 .header("Accept", "application/json")
+                .addHeader("apikey", BuildConfig.API_KEY)
                 .build()
         } catch (ex: Exception) {
             ex.printStackTrace()

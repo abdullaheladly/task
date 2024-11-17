@@ -24,7 +24,7 @@ android {
 
     buildTypes {
         getByName("debug") {
-            buildConfigField("String", "SECRET_KEY", "\"0cc6951bc14154bbc4c9ae700bb18fe4\"")
+            buildConfigField("String", "API_KEY", "\"alS3WWlk09WFj6qeiaEoI7EAtXujPpyd\"")
         }
         release {
             isMinifyEnabled = false
